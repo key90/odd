@@ -1,116 +1,186 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>записался случайно. вылечили навсегда</title>
-  <style>
-    * {
-      box-sizing: border-box;
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Почему Ты — моя судьба</title>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0; padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f0f8ff;
+    color: #222;
+    overflow-x: hidden;
+  }
+  header {
+    background: #2a5dab;
+    color: white;
+    padding: 20px 30px;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  nav {
+    display: flex;
+    justify-content: center;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+  nav button {
+    border: none;
+    background: none;
+    padding: 15px 20px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #2a5dab;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  nav button:hover,
+  nav button.active {
+    background-color: #2a5dab;
+    color: white;
+  }
+  main {
+    max-width: 700px;
+    margin: 40px auto;
+    background: white;
+    border-radius: 15px;
+    padding: 30px 40px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.07);
+    min-height: 350px;
+    position: relative;
+    overflow: hidden;
+  }
+  section {
+    opacity: 0;
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    padding-right: 20px;
+    overflow-y: auto;
+    transition: opacity 0.8s ease;
+    pointer-events: none;
+  }
+  section.active {
+    opacity: 1;
+    position: relative;
+    pointer-events: auto;
+  }
+  h2 {
+    color: #2a5dab;
+    margin-bottom: 1rem;
+  }
+  p {
+    line-height: 1.5;
+    margin-bottom: 1.2rem;
+  }
+  .highlight {
+    color: #d44a4a;
+    font-weight: 700;
+  }
+  img {
+    max-width: 100%;
+    border-radius: 10px;
+    margin-top: 1rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+  /* Simple fade-in animation for content */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation-fill-mode: forwards;
+  }
+  .fade-up.active {
+    animation: fadeUp 0.8s ease forwards;
+  }
+  @keyframes fadeUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
-
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #fefefe;
-      color: #2e2e2e;
-      line-height: 1.6;
-      padding: 20px;
-    }
-
-    .container {
-      max-width: 800px;
-      margin: auto;
-      padding: 10px;
-    }
-
-    h1 {
-      font-size: 2em;
-      margin-bottom: 0.3em;
-    }
-
-    h2 {
-      margin-top: 1.8em;
-      font-size: 1.4em;
-      color: #444;
-    }
-
-    p {
-      font-size: 1.05em;
-      margin-bottom: 1.2em;
-    }
-
-    .button {
-      display: inline-block;
-      margin-top: 30px;
-      padding: 12px 20px;
-      background-color: #d99e6a;
-      color: white;
-      text-decoration: none;
-      border-radius: 6px;
-      font-size: 1em;
-      transition: background-color 0.3s;
-    }
-
-    .button:hover {
-      background-color: #c4844f;
-    }
-
-    footer {
-      margin-top: 50px;
-      font-size: 0.85em;
-      color: #aaa;
-      text-align: center;
-    }
-
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 1.6em;
-      }
-      h2 {
-        font-size: 1.2em;
-      }
-      p {
-        font-size: 1em;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
-  <div class="container">
-    <h1>записался случайно. вылечили навсегда</h1>
-    <p>иногда врач лечит не только тело, но и настраивает внутренний баланс в человеке, даже не замечая этого</p>
 
-    <h2>наше знакомство</h2>
-    <p>мы сидели рядом в самолёте. Просто случайное место, просто рейс.  
-    но в какой-то момент стало ясно: ничего случайного не бывает.  
-    ты была очень красива. настолько, что воздух в салоне вдруг стал другим.</p>
+<header>Почему Ты — моя судьба</header>
 
-    <h2>первое впечатление</h2>
-    <p>Уже позже, когда узнал, что ты врач, всё стало на свои места.  
-    уверенность, спокойствие, светлая внутренняя сила.  
-    с тобой рядом становилось легче — будто организм сам вспоминал, как быть в балансе.</p>
+<nav>
+  <button data-target="home" class="active">Главная</button>
+  <button data-target="flight">Наша встреча</button>
+  <button data-target="doctor">Твоя сила</button>
+  <button data-target="dreams">Мечты вместе</button>
+  <button data-target="proposal">Моё предложение</button>
+</nav>
 
-    <h2>Говорят, врачи не улыбаются часто…</h2>
-    <p>…но твоя улыбка — как короткий солнечный момент в длинной смене.  
-    как обед, который всё-таки наступил.  
-    как взгляд, в котором сочетается профессионализм и человечность.  
-    и да, теперь я точно знаю, что гормоны — не единственное, что может сбиться в организме.  
-    иногда сердце начинает работать по-другому после встречи с определёнными людьми.</p>
+<main>
+  <section id="home" class="active fade-up">
+    <h2>Почему именно ты?</h2>
+    <p>Мы не так давно знакомы, но уже сейчас я понимаю — <span class="highlight">ты та самая</span>, с кем я хочу идти по жизни рядом. Встреча с тобой — как знак судьбы.</p>
+    <p>Ты — врач, спасатель жизней, умная, сильная и невероятно добрая. Именно такая девушка, с которой хочется строить настоящее будущее.</p>
+    <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=700&q=80" alt="Символ любви и судьбы" />
+  </section>
 
-    <h2>Я не знаю, заметила ли ты…</h2>
-    <p>…но в тот день ты вылечила чуть больше, чем анализы показывают.  
-    ты подарила чувство спокойствия. Интерес.  
-    и ощущение, что за пределами клиники может начаться что-то настоящее.</p>
+  <section id="flight" class="fade-up">
+    <h2>Наша встреча в самолёте</h2>
+    <p>Помнишь, как мы сидели рядом в самолёте? Простая случайность, которая изменила всё. Разговоры, улыбки — и я понял, что рядом особенный человек.</p>
+    <p>С первых минут общения я почувствовал, что с тобой легко, тепло и правильно. Тот самый момент, когда понимаешь — всё ещё впереди.</p>
+    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=700&q=80" alt="Самолёт в небе" />
+  </section>
 
-    <h2>это не настоящая история пациента</h2>
-    <p>это просто кто-то, кто однажды понял: <strong>ты — редкий человек...</strong></p>
+  <section id="doctor" class="fade-up">
+    <h2>Твоя сила и забота как врача</h2>
+    <p>Ты — врач эндокринолог, и это значит, что ты каждый день даришь надежду и здоровье людям. Твоя профессия требует силы духа и терпения.</p>
+    <p>Я восхищаюсь твоей преданностью делу, умом и добротой. Именно такие качества делают тебя для меня идеальной женщиной.</p>
+    <img src="https://images.unsplash.com/photo-1588776814546-58ec7c3a3701?auto=format&fit=crop&w=700&q=80" alt="Врач на работе" />
+  </section>
 
-    <a href="#" class="button">Если ты читаешь это — спасибо, что ты есть</a>
+  <section id="dreams" class="fade-up">
+    <h2>Наши мечты и планы</h2>
+    <p>Я хочу, чтобы мы мечтали и строили планы вместе — о семье, путешествиях, поддержке и счастье.</p>
+    <p>Ты — моя опора, и я верю, что вместе мы сможем всё, что захотим. Я хочу быть рядом, разделять с тобой каждый день.</p>
+    <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=700&q=80" alt="Пара мечтает" />
+  </section>
 
-    <footer>
-      сделано тем, кто заметил.
-    </footer>
-  </div>
+  <section id="proposal" class="fade-up">
+    <h2>Моё предложение</h2>
+    <p>Я не знаю, как всё сложится, но хочу попробовать идти по жизни с тобой рядом.</p>
+    <p>Ты — та, с кем я хочу делить радость и трудности, смеяться и мечтать.</p>
+    <p><strong>Выйдешь ли ты за меня замуж?</strong></p>
+    <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=700&q=80" alt="Предложение руки и сердца" />
+  </section>
+</main>
+
+<script>
+  const buttons = document.querySelectorAll('nav button');
+  const sections = document.querySelectorAll('main section');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const target = btn.dataset.target;
+
+      sections.forEach(section => {
+        if (section.id === target) {
+          section.classList.add('active');
+          section.classList.add('fade-up');
+        } else {
+          section.classList.remove('active');
+          section.classList.remove('fade-up');
+        }
+      });
+      window.scrollTo(0, 0);
+    });
+  });
+</script>
+
 </body>
 </html>
