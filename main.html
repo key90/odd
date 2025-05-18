@@ -78,6 +78,46 @@
     margin-top: 20px; text-align: center;
     font-weight: 700; color: #6b5b95; min-height: 24px;
   }
+  img.section-image {
+    width: 100%; border-radius: 12px; margin-bottom: 15px;
+    box-shadow: 0 5px 15px rgba(107,91,149,0.3);
+  }
+  /* Модальное окно */
+  #musicModal {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(74, 63, 111, 0.95);
+    color: #f4f0fa;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    font-size: 1.4rem;
+    padding: 20px;
+    text-align: center;
+    user-select: none;
+  }
+  #musicModal button {
+    margin-top: 30px;
+    padding: 14px 36px;
+    font-size: 1.3rem;
+    border: none;
+    border-radius: 40px;
+    background-color: #8c7fcf;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 700;
+    box-shadow: 0 5px 15px rgba(140,127,207,0.6);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  #musicModal button:hover {
+    background-color: #6b5b95;
+    transform: scale(1.05);
+  }
+  #musicModal button:active {
+    transform: scale(0.95);
+  }
   @media (max-width: 430px) {
     body {font-size: 16px;}
     nav button {font-size: 0.9rem; padding: 12px 0;}
@@ -85,6 +125,13 @@
     h2 {font-size: 1.4rem;}
     p {font-size: 1rem;}
     form button {padding: 12px 20px; font-size: 1rem;}
+    #musicModal {
+      font-size: 1.1rem;
+    }
+    #musicModal button {
+      font-size: 1.1rem;
+      padding: 12px 28px;
+    }
   }
 </style>
 </head>
@@ -103,34 +150,38 @@
 <main>
   <section id="home" class="active" tabindex="0" aria-live="polite">
     <h2>Почему именно ты?</h2>
+    <img class="section-image" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Романтичный пейзаж закат" />
     <p>Мы не так давно знакомы, но уже сейчас я понимаю — <span class="highlight">ты та самая</span>, с кем я хочу идти по жизни рядом. Встреча с тобой — знак судьбы, который не хочется упускать.</p>
   </section>
 
   <section id="flight" tabindex="0" aria-live="polite">
     <h2>Наша встреча в самолёте</h2>
+    <img class="section-image" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" alt="Самолёт в небе" />
     <p>Помнишь, как мы сидели рядом в самолёте? Эта случайность изменила всё. Мгновения, когда мы разговаривали, заставили меня поверить в судьбу и уникальность нашей встречи.</p>
   </section>
 
   <section id="doctor" tabindex="0" aria-live="polite">
     <h2>Твоя сила и забота как врача</h2>
+    <img class="section-image" src="https://images.unsplash.com/photo-1580281658628-6ef3a9b18268?auto=format&fit=crop&w=800&q=80" alt="Врач заботливо держит руки пациента" />
     <p>Ты — врач эндокринолог, и это значит, что каждый день ты даришь людям надежду и здоровье. Твоя сила в заботе, терпении и стремлении сделать этот мир лучше вдохновляет меня.</p>
   </section>
 
   <section id="dreams" tabindex="0" aria-live="polite">
     <h2>Наши мечты и планы</h2>
+    <img class="section-image" src="https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=800&q=80" alt="Пара держится за руки на берегу" />
     <p>Я хочу, чтобы мы вместе мечтали и строили планы — о семье, путешествиях, поддержке и счастье. Вместе нам под силу всё.</p>
   </section>
 
   <section id="proposal" tabindex="0" aria-live="polite">
     <h2>Моё предложение</h2>
+    <img class="section-image" src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=800&q=80" alt="Обручальные кольца на фоне" />
     <p>Я не знаю, как всё сложится, но хочу попробовать идти по жизни с тобой рядом.</p>
     <p>Ты — та, с кем я хочу делить радость и трудности, смеяться и мечтать.</p>
     <p><strong>Выйдешь ли ты за меня замуж?</strong></p>
 
-    <form id="proposalForm" action="https://formsubmit.co/courageous132@gmail.com" method="POST" novalidate>
+    <form id="proposalForm" action="https://formsubmit.co/courageous132@gmsil.com" method="POST" novalidate>
       <input type="hidden" name="answer" id="answer" value="" />
       <input type="hidden" name="_subject" value="Ответ с сайта - предложение" />
-      <!-- скрыть captcha -->
       <input type="hidden" name="_captcha" value="false" />
       <button type="submit" data-answer="Да" aria-label="Ответ Да">Да</button>
       <button type="submit" data-answer="Нет" aria-label="Ответ Нет">Нет</button>
@@ -138,68 +189,104 @@
     </form>
     <div id="responseMessage" role="alert" aria-live="polite"></div>
 
-    <audio id="romanticMusic" src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_5cbe6a11bb.mp3?filename=romantic-soft-piano-5747.mp3" preload="auto" loop></audio>
+    <audio id="romanticMusic" src="https://cdn.pixabay.com/download/audio/2022/03/25/audio_9c6a6d9c62.mp3?filename=romantic-piano-14129.mp3" preload="auto" loop></audio>
   </section>
 </main>
+
+<!-- Модал с подтверждением для музыки -->
+<div id="musicModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDesc" hidden>
+  <div>
+    <h2 id="modalTitle">Сейчас будет чудо, ты готова?</h2>
+    <button id="startMusicBtn" aria-label="Включить музыку и продолжить">Вперед</button>
+  </div>
+</div>
 
 <script>
   const navButtons = document.querySelectorAll('nav button');
   const sections = document.querySelectorAll('main section');
+  const musicModal = document.getElementById('musicModal');
+  const startMusicBtn = document.getElementById('startMusicBtn');
   const music = document.getElementById('romanticMusic');
-  const form = document.getElementById('proposalForm');
-  const responseMessage = document.getElementById('responseMessage');
-  const answerInput = document.getElementById('answer');
+  const proposalSectionId = 'proposal';
 
-  navButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      navButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+  // Управление активными вкладками и секциями
+  navButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const target = button.getAttribute('data-target');
 
-      const target = btn.dataset.target;
+      // Если вкладка уже активна - ничего не делать
+      if (button.classList.contains('active')) return;
 
-      sections.forEach(section => {
-        if (section.id === target) {
-          section.classList.add('active');
-          section.focus();
-        } else {
-          section.classList.remove('active');
-        }
-      });
+      // Убираем активность со всех кнопок и секций
+      navButtons.forEach(btn => btn.classList.remove('active'));
+      sections.forEach(sec => sec.classList.remove('active'));
 
-      window.scrollTo({top: 0, behavior: 'smooth'});
+      // Активируем кнопку и секцию
+      button.classList.add('active');
+      const activeSection = document.getElementById(target);
+      activeSection.classList.add('active');
+      activeSection.focus();
 
-      if (target === 'proposal') {
-        music.volume = 0.15;
-        music.play().catch(() => {
-          // Автовоспроизведение может быть заблокировано браузером
-          console.log("Автовоспроизведение музыки заблокировано");
-        });
-      } else {
+      // Если это вкладка "Моё предложение" - показать модал подтверждения музыки
+      if (target === proposalSectionId) {
+        // Показать модал и заблокировать музыку
         music.pause();
         music.currentTime = 0;
+        music.volume = 0;
+        musicModal.hidden = false;
+      } else {
+        // Если уходим с предложения, скрываем модал и останавливаем музыку
+        music.pause();
+        music.currentTime = 0;
+        musicModal.hidden = true;
       }
-
-      responseMessage.textContent = '';
     });
   });
 
-  form.addEventListener('click', e => {
-    if (e.target.tagName === 'BUTTON') {
-      e.preventDefault();
-      const answer = e.target.dataset.answer;
-      answerInput.value = answer;
+  // При клике на кнопку "Вперед" запускаем музыку плавно и скрываем модал
+  startMusicBtn.addEventListener('click', () => {
+    musicModal.hidden = true;
+    music.volume = 0;
+    music.play();
 
-      form.submit();
-
-      responseMessage.textContent = `Спасибо за твой ответ: "${answer}"!`;
-
-      if (answer === "Нет") {
-        responseMessage.textContent += " Но я верю, что всё впереди!";
+    // Плавно увеличить громкость
+    let vol = 0;
+    const fadeIn = setInterval(() => {
+      if (vol < 1) {
+        vol += 0.02;
+        music.volume = Math.min(vol, 1);
+      } else {
+        clearInterval(fadeIn);
       }
-      if (answer === "Может быть") {
-        responseMessage.textContent += " Я терпеливо подожду и докажу, что это судьба.";
+    }, 100);
+  });
+
+  // Обработка формы с ответом
+  const proposalForm = document.getElementById('proposalForm');
+  const answerInput = document.getElementById('answer');
+  const responseMessage = document.getElementById('responseMessage');
+
+  proposalForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const clickedButton = e.submitter;
+    const answer = clickedButton.getAttribute('data-answer');
+    answerInput.value = answer;
+
+    // Отправляем через fetch чтобы не перезагружать страницу
+    fetch(proposalForm.action, {
+      method: proposalForm.method,
+      body: new FormData(proposalForm),
+      headers: { 'Accept': 'application/json' },
+    }).then(response => {
+      if (response.ok) {
+        responseMessage.textContent = 'Спасибо за ответ! Я очень ценю твою искренность.';
+        proposalForm.reset();
+      } else {
+        responseMessage.textContent = 'Что-то пошло не так, попробуй ещё раз.';
       }
-    }
+    }).catch(() => {
+      responseMessage.textContent = 'Ошибка сети. Попробуй позже.';
+    });
   });
 </script>
 
