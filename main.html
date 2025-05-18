@@ -82,42 +82,6 @@
     width: 100%; border-radius: 12px; margin-bottom: 15px;
     box-shadow: 0 5px 15px rgba(107,91,149,0.3);
   }
-  /* Модальное окно */
-  #musicModal {
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(74, 63, 111, 0.95);
-    color: #f4f0fa;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    font-size: 1.4rem;
-    padding: 20px;
-    text-align: center;
-    user-select: none;
-  }
-  #musicModal button {
-    margin-top: 30px;
-    padding: 14px 36px;
-    font-size: 1.3rem;
-    border: none;
-    border-radius: 40px;
-    background-color: #8c7fcf;
-    color: #fff;
-    cursor: pointer;
-    font-weight: 700;
-    box-shadow: 0 5px 15px rgba(140,127,207,0.6);
-    transition: background-color 0.3s ease, transform 0.2s ease;
-  }
-  #musicModal button:hover {
-    background-color: #6b5b95;
-    transform: scale(1.05);
-  }
-  #musicModal button:active {
-    transform: scale(0.95);
-  }
   @media (max-width: 430px) {
     body {font-size: 16px;}
     nav button {font-size: 0.9rem; padding: 12px 0;}
@@ -125,13 +89,6 @@
     h2 {font-size: 1.4rem;}
     p {font-size: 1rem;}
     form button {padding: 12px 20px; font-size: 1rem;}
-    #musicModal {
-      font-size: 1.1rem;
-    }
-    #musicModal button {
-      font-size: 1.1rem;
-      padding: 12px 28px;
-    }
   }
 </style>
 </head>
@@ -189,104 +146,67 @@
     </form>
     <div id="responseMessage" role="alert" aria-live="polite"></div>
 
-    <audio id="romanticMusic" src="https://cdn.pixabay.com/download/audio/2022/03/25/audio_9c6a6d9c62.mp3?filename=romantic-piano-14129.mp3" preload="auto" loop></audio>
+    <audio id="romanticMusic" src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_5cbe6a11bb.mp3?filename=romantic-soft-piano-5747.mp3" preload="auto" loop></audio>
   </section>
 </main>
-
-<!-- Модал с подтверждением для музыки -->
-<div id="musicModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDesc" hidden>
-  <div>
-    <h2 id="modalTitle">Сейчас будет чудо, ты готова?</h2>
-    <button id="startMusicBtn" aria-label="Включить музыку и продолжить">Вперед</button>
-  </div>
-</div>
 
 <script>
   const navButtons = document.querySelectorAll('nav button');
   const sections = document.querySelectorAll('main section');
-  const musicModal = document.getElementById('musicModal');
-  const startMusicBtn = document.getElementById('startMusicBtn');
   const music = document.getElementById('romanticMusic');
-  const proposalSectionId = 'proposal';
-
-  // Управление активными вкладками и секциями
-  navButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const target = button.getAttribute('data-target');
-
-      // Если вкладка уже активна - ничего не делать
-      if (button.classList.contains('active')) return;
-
-      // Убираем активность со всех кнопок и секций
-      navButtons.forEach(btn => btn.classList.remove('active'));
-      sections.forEach(sec => sec.classList.remove('active'));
-
-      // Активируем кнопку и секцию
-      button.classList.add('active');
-      const activeSection = document.getElementById(target);
-      activeSection.classList.add('active');
-      activeSection.focus();
-
-      // Если это вкладка "Моё предложение" - показать модал подтверждения музыки
-      if (target === proposalSectionId) {
-        // Показать модал и заблокировать музыку
-        music.pause();
-        music.currentTime = 0;
-        music.volume = 0;
-        musicModal.hidden = false;
-      } else {
-        // Если уходим с предложения, скрываем модал и останавливаем музыку
-        music.pause();
-        music.currentTime = 0;
-        musicModal.hidden = true;
-      }
-    });
-  });
-
-  // При клике на кнопку "Вперед" запускаем музыку плавно и скрываем модал
-  startMusicBtn.addEventListener('click', () => {
-    musicModal.hidden = true;
-    music.volume = 0;
-    music.play();
-
-    // Плавно увеличить громкость
-    let vol = 0;
-    const fadeIn = setInterval(() => {
-      if (vol < 1) {
-        vol += 0.02;
-        music.volume = Math.min(vol, 1);
-      } else {
-        clearInterval(fadeIn);
-      }
-    }, 100);
-  });
-
-  // Обработка формы с ответом
-  const proposalForm = document.getElementById('proposalForm');
-  const answerInput = document.getElementById('answer');
+  const form = document.getElementById('proposalForm');
   const responseMessage = document.getElementById('responseMessage');
+  const answerInput = document.getElementById('answer');
 
-  proposalForm.addEventListener('submit', e => {
-    e.preventDefault();
-    const clickedButton = e.submitter;
-    const answer = clickedButton.getAttribute('data-answer');
-    answerInput.value = answer;
+  navButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      navButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
 
-    // Отправляем через fetch чтобы не перезагружать страницу
-    fetch(proposalForm.action, {
-      method: proposalForm.method,
-      body: new FormData(proposalForm),
-      headers: { 'Accept': 'application/json' },
-    }).then(response => {
-      if (response.ok) {
-        responseMessage.textContent = 'Спасибо за ответ! Я очень ценю твою искренность.';
-        proposalForm.reset();
+      const target = btn.dataset.target;
+
+      sections.forEach(section => {
+        if (section.id === target) {
+          section.classList.add('active');
+          section.focus();
+        } else {
+          section.classList.remove('active');
+        }
+      });
+
+      window.scrollTo({top: 0, behavior: 'smooth'});
+
+      if (target === 'proposal') {
+        music.volume = 0.15;
+        music.play().catch(() => {
+          console.log("Автовоспроизведение музыки заблокировано браузером");
+        });
       } else {
-        responseMessage.textContent = 'Что-то пошло не так, попробуй ещё раз.';
+        music.pause();
+        music.currentTime = 0;
       }
-    }).catch(() => {
-      responseMessage.textContent = 'Ошибка сети. Попробуй позже.';
+
+      responseMessage.textContent = '';
     });
+  });
+
+  form.addEventListener('click', e => {
+    if (e.target.tagName === 'BUTTON') {
+      e.preventDefault();
+      const answer = e.target.dataset.answer;
+      answerInput.value = answer;
+
+      form.submit();
+
+      responseMessage.textContent = `Спасибо за твой ответ: "${answer}"!`;
+
+      if (answer === "Нет") {
+        responseMessage.textContent += " Но я верю, что всё впереди!";
+      }
+      if (answer === "Может быть") {
+        responseMessage.textContent += " Я терпеливо подожду и докажу, что это судьба.";
+      }
+    }
   });
 </script>
 
