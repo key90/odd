@@ -5,148 +5,86 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 <title>Почему Ты — моя судьба</title>
 <style>
-  /* --- Общие стили --- */
-  * {
-    box-sizing: border-box;
-  }
   body {
-    margin: 0; padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f0f8ff;
-    color: #222;
-    overflow-x: hidden;
+    margin: 0; padding: 0; font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f8e7e7, #f4f0fa);
+    color: #333;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
   }
   header {
-    background: #2a5dab;
-    color: white;
-    padding: 18px 20px;
-    text-align: center;
-    font-size: 1.8rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    background: #4a3f6f; color: #fff; text-align: center;
+    padding: 20px 10px; font-size: 1.5rem; font-weight: 700; letter-spacing: 0.05em;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
   }
   nav {
-    display: flex;
-    overflow-x: auto;
-    background: #fff;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  }
-  nav::-webkit-scrollbar {
-    height: 6px;
-  }
-  nav::-webkit-scrollbar-thumb {
-    background: #2a5dab;
-    border-radius: 3px;
+    display: flex; justify-content: space-around;
+    background: #6b5b95; box-shadow: 0 3px 8px rgba(0,0,0,0.2);
   }
   nav button {
-    flex: 1 0 auto;
-    border: none;
-    background: none;
-    padding: 15px 18px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 1rem;
-    color: #2a5dab;
-    transition: background-color 0.3s, color 0.3s, transform 0.15s ease;
-    white-space: nowrap;
+    flex: 1; padding: 14px 0; background: none; border: none;
+    color: #ddd; font-weight: 600; font-size: 1rem; cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
   nav button:hover {
-    background-color: #d9e7ff;
+    background: #8c7fcf; color: #fff;
   }
   nav button.active {
-    background-color: #2a5dab;
-    color: white;
-    animation: pulse 1.5s infinite;
+    background: #d6c4f0; color: #4a3f6f; font-weight: 700;
   }
-  nav button:active {
-    transform: translateY(-5px) scale(1.05);
-    transition: transform 0.1s ease;
-  }
-  @keyframes pulse {
-    0%, 100% { box-shadow: 0 0 8px 2px #2a5dab; }
-    50% { box-shadow: 0 0 15px 5px #7da8e9; }
-  }
-
   main {
-    max-width: 430px; /* iPhone 14 Pro Max width */
-    margin: 0 auto 40px;
-    background: white;
-    border-radius: 15px;
-    padding: 25px 20px 35px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.07);
-    min-height: 450px;
-    position: relative;
-    overflow: hidden;
+    flex-grow: 1; padding: 25px 20px; max-width: 430px; margin: 0 auto;
   }
   section {
-    opacity: 0;
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100%;
-    padding-right: 10px;
-    overflow-y: auto;
-    transition: opacity 0.8s ease;
-    pointer-events: none;
-    transform: translateY(20px);
+    display: none;
+    animation: fadeInUp 0.6s ease forwards;
   }
   section.active {
-    opacity: 1;
-    position: relative;
-    pointer-events: auto;
-    transform: translateY(0);
-    animation: fadeUp 0.7s ease forwards;
+    display: block;
   }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+  @keyframes fadeInUp {
+    0% {opacity: 0; transform: translateY(30px);}
+    100% {opacity: 1; transform: translateY(0);}
   }
-
   h2 {
-    color: #2a5dab;
-    margin-bottom: 1rem;
-    font-size: 1.8rem;
+    color: #4a3f6f; font-size: 1.6rem; margin-bottom: 15px;
+    border-bottom: 2px solid #6b5b95; padding-bottom: 5px;
   }
   p {
-    line-height: 1.5;
-    margin-bottom: 1.2rem;
-    font-size: 1.1rem;
+    font-size: 1.1rem; line-height: 1.5; margin-bottom: 15px;
   }
   .highlight {
-    color: #d44a4a;
-    font-weight: 700;
+    color: #8c7fcf; font-weight: 700;
   }
-  img {
-    max-width: 100%;
-    border-radius: 10px;
-    margin-top: 1rem;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  form {
+    margin-top: 30px; display: flex; justify-content: center; gap: 20px;
   }
-
-  /* Прикол: анимация "прыжок" картинок при загрузке */
-  img {
-    animation: jumpIn 0.6s ease forwards;
+  form button {
+    background-color: #6b5b95; border: none; color: white;
+    padding: 14px 26px; font-size: 1.1rem; border-radius: 30px;
+    cursor: pointer; font-weight: 700;
+    box-shadow: 0 4px 12px rgba(107,91,149,0.5);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    user-select: none;
   }
-  @keyframes jumpIn {
-    0% { transform: translateY(30px) scale(0.9); opacity: 0; }
-    50% { transform: translateY(-10px) scale(1.05); opacity: 1; }
-    100% { transform: translateY(0) scale(1); opacity: 1; }
+  form button:hover {
+    background-color: #8c7fcf;
+    transform: scale(1.05);
   }
-  
-  /* Прокрутка в секциях с плавным скроллом */
-  section::-webkit-scrollbar {
-    width: 6px;
+  form button:active {
+    transform: scale(0.95);
   }
-  section::-webkit-scrollbar-thumb {
-    background: #2a5dab;
-    border-radius: 3px;
+  #responseMessage {
+    margin-top: 20px; text-align: center;
+    font-weight: 700; color: #6b5b95; min-height: 24px;
   }
-  section::-webkit-scrollbar-track {
-    background: #f0f8ff;
+  @media (max-width: 430px) {
+    body {font-size: 16px;}
+    nav button {font-size: 0.9rem; padding: 12px 0;}
+    main {padding: 20px 12px;}
+    h2 {font-size: 1.4rem;}
+    p {font-size: 1rem;}
+    form button {padding: 12px 20px; font-size: 1rem;}
   }
 </style>
 </head>
@@ -155,58 +93,66 @@
 <header>Почему Ты — моя судьба</header>
 
 <nav>
-  <button data-target="home" class="active">Главная</button>
-  <button data-target="flight">Наша встреча</button>
-  <button data-target="doctor">Твоя сила</button>
-  <button data-target="dreams">Мечты вместе</button>
-  <button data-target="proposal">Моё предложение</button>
+  <button data-target="home" class="active" aria-label="Главная страница">Главная</button>
+  <button data-target="flight" aria-label="Наша встреча">Наша встреча</button>
+  <button data-target="doctor" aria-label="Твоя сила">Твоя сила</button>
+  <button data-target="dreams" aria-label="Мечты вместе">Мечты вместе</button>
+  <button data-target="proposal" aria-label="Моё предложение">Моё предложение</button>
 </nav>
 
 <main>
-  <section id="home" class="active">
+  <section id="home" class="active" tabindex="0" aria-live="polite">
     <h2>Почему именно ты?</h2>
-    <p>Мы не так давно знакомы, но уже сейчас я понимаю — <span class="highlight">ты та самая</span>, с кем я хочу идти по жизни рядом. Встреча с тобой — как знак судьбы.</p>
-    <p>Ты — врач, спасатель жизней, умная, сильная и невероятно добрая. Именно такая девушка, с которой хочется строить настоящее будущее.</p>
-    <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=700&q=80" alt="Символ любви и судьбы" />
+    <p>Мы не так давно знакомы, но уже сейчас я понимаю — <span class="highlight">ты та самая</span>, с кем я хочу идти по жизни рядом. Встреча с тобой — знак судьбы, который не хочется упускать.</p>
   </section>
 
-  <section id="flight">
+  <section id="flight" tabindex="0" aria-live="polite">
     <h2>Наша встреча в самолёте</h2>
-    <p>Помнишь, как мы сидели рядом в самолёте? Простая случайность, которая изменила всё. Разговоры, улыбки — и я понял, что рядом особенный человек.</p>
-    <p>С первых минут общения я почувствовал, что с тобой легко, тепло и правильно. Тот самый момент, когда понимаешь — всё ещё впереди.</p>
-    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=700&q=80" alt="Самолёт в небе" />
+    <p>Помнишь, как мы сидели рядом в самолёте? Эта случайность изменила всё. Мгновения, когда мы разговаривали, заставили меня поверить в судьбу и уникальность нашей встречи.</p>
   </section>
 
-  <section id="doctor">
+  <section id="doctor" tabindex="0" aria-live="polite">
     <h2>Твоя сила и забота как врача</h2>
-    <p>Ты — врач эндокринолог, и это значит, что ты каждый день даришь надежду и здоровье людям. Твоя профессия требует силы духа и терпения.</p>
-    <p>Я восхищаюсь твоей преданностью делу, умом и добротой. Именно такие качества делают тебя для меня идеальной женщиной.</p>
-    <img src="https://images.unsplash.com/photo-1588776814546-58ec7c3a3701?auto=format&fit=crop&w=700&q=80" alt="Врач на работе" />
+    <p>Ты — врач эндокринолог, и это значит, что каждый день ты даришь людям надежду и здоровье. Твоя сила в заботе, терпении и стремлении сделать этот мир лучше вдохновляет меня.</p>
   </section>
 
-  <section id="dreams">
+  <section id="dreams" tabindex="0" aria-live="polite">
     <h2>Наши мечты и планы</h2>
-    <p>Я хочу, чтобы мы мечтали и строили планы вместе — о семье, путешествиях, поддержке и счастье.</p>
-    <p>Ты — моя опора, и я верю, что вместе мы сможем всё, что захотим. Я хочу быть рядом, разделять с тобой каждый день.</p>
-    <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=700&q=80" alt="Пара мечтает" />
+    <p>Я хочу, чтобы мы вместе мечтали и строили планы — о семье, путешествиях, поддержке и счастье. Вместе нам под силу всё.</p>
   </section>
 
-  <section id="proposal">
+  <section id="proposal" tabindex="0" aria-live="polite">
     <h2>Моё предложение</h2>
     <p>Я не знаю, как всё сложится, но хочу попробовать идти по жизни с тобой рядом.</p>
     <p>Ты — та, с кем я хочу делить радость и трудности, смеяться и мечтать.</p>
     <p><strong>Выйдешь ли ты за меня замуж?</strong></p>
-    <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=700&q=80" alt="Предложение руки и сердца" />
+
+    <form id="proposalForm" action="https://formsubmit.co/courageous132@gmsil.com" method="POST" novalidate>
+      <input type="hidden" name="answer" id="answer" value="" />
+      <input type="hidden" name="_subject" value="Ответ с сайта - предложение" />
+      <!-- скрыть captcha -->
+      <input type="hidden" name="_captcha" value="false" />
+      <button type="submit" data-answer="Да" aria-label="Ответ Да">Да</button>
+      <button type="submit" data-answer="Нет" aria-label="Ответ Нет">Нет</button>
+      <button type="submit" data-answer="Может быть" aria-label="Ответ Может быть">Может быть</button>
+    </form>
+    <div id="responseMessage" role="alert" aria-live="polite"></div>
+
+    <audio id="romanticMusic" src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_5cbe6a11bb.mp3?filename=romantic-soft-piano-5747.mp3" preload="auto" loop></audio>
   </section>
 </main>
 
 <script>
-  const buttons = document.querySelectorAll('nav button');
+  const navButtons = document.querySelectorAll('nav button');
   const sections = document.querySelectorAll('main section');
+  const music = document.getElementById('romanticMusic');
+  const form = document.getElementById('proposalForm');
+  const responseMessage = document.getElementById('responseMessage');
+  const answerInput = document.getElementById('answer');
 
-  buttons.forEach(btn => {
+  navButtons.forEach(btn => {
     btn.addEventListener('click', () => {
-      buttons.forEach(b => b.classList.remove('active'));
+      navButtons.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
       const target = btn.dataset.target;
@@ -214,12 +160,46 @@
       sections.forEach(section => {
         if (section.id === target) {
           section.classList.add('active');
+          section.focus();
         } else {
           section.classList.remove('active');
         }
       });
-      window.scrollTo(0, 0);
+
+      window.scrollTo({top: 0, behavior: 'smooth'});
+
+      if (target === 'proposal') {
+        music.volume = 0.15;
+        music.play().catch(() => {
+          // Автовоспроизведение может быть заблокировано браузером
+          console.log("Автовоспроизведение музыки заблокировано");
+        });
+      } else {
+        music.pause();
+        music.currentTime = 0;
+      }
+
+      responseMessage.textContent = '';
     });
+  });
+
+  form.addEventListener('click', e => {
+    if (e.target.tagName === 'BUTTON') {
+      e.preventDefault();
+      const answer = e.target.dataset.answer;
+      answerInput.value = answer;
+
+      form.submit();
+
+      responseMessage.textContent = `Спасибо за твой ответ: "${answer}"!`;
+
+      if (answer === "Нет") {
+        responseMessage.textContent += " Но я верю, что всё впереди!";
+      }
+      if (answer === "Может быть") {
+        responseMessage.textContent += " Я терпеливо подожду и докажу, что это судьба.";
+      }
+    }
   });
 </script>
 
